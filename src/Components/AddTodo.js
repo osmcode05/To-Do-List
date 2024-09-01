@@ -3,16 +3,12 @@ import { FaPlus } from "react-icons/fa";
 
 export default function AddTodo({ onAddTodo }) {
   const InpAdd = useRef(null);
-  window.onload = () => {
-    InpAdd.current.focus(); // Focus in The input if the page reloading
-  };
-
-  const [title, setTitle] = useState("");
+  const [todoTxt, setTodoTxt] = useState("");
 
   const AddTodo = () => {
-    if (/[^ \t\r\n]/.test(title)) {
-      onAddTodo(title);
-      setTitle("");
+    if (/[^ \t\r\n]/.test(todoTxt)) {
+      onAddTodo(todoTxt);
+      setTodoTxt("");
     } else {
       alert("Please write a To Do");
     }
@@ -24,8 +20,8 @@ export default function AddTodo({ onAddTodo }) {
       <input
         ref={InpAdd}
         placeholder="Add Todo"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        value={todoTxt}
+        onChange={(e) => setTodoTxt(e.target.value)}
       />
       <button id="AddBtn" onClick={AddTodo}>
         <FaPlus size={20} />

@@ -4,47 +4,42 @@ import TaskList from "./Components/TaskList.js";
 import { FaListCheck } from "react-icons/fa6";
 
 export default function App() {
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem("UserToDo");
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
 
-const [todos, setTodos] = useState(() => {
-  return localStorage.getItem("UserToDo") ? JSON.parse(localStorage.getItem("UserToDo")) : [];
-});
-  
-useEffect(() => {
-  localStorage.setItem("UserToDo", JSON.stringify(todos));
-}, [todos]);
+  useEffect(() => {
+    localStorage.setItem("UserToDo", JSON.stringify(todos));
+  }, [todos]);
 
-  // Function to update both state and localStorage
-  const saveTodos = (updatedUserToDo) => {
-    setTodos(updatedUserToDo);
+  const handleAddTodo = (todoTxt) => {
+    let index = todos.length ? todos[todos.length - 1].id + 1 : 0;
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      { id: index, title: todoTxt, done: false },
+    ]);
   };
 
-  // Handle adding a new todo
-  const handleAddTodo = (title) => {
-    const newTodo = {
-      title,
-      done: false,
-    };
-    saveTodos([...todos, newTodo]);
-  };
-
-  // Handle updating an existing todo
   const handleChangeTodo = (updatedTodo) => {
-    const updatedTodos = todos.map((todo) =>
-      todo.id === updatedTodo.id ? updatedTodo : todo
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo))
     );
-    saveTodos(updatedTodos);
   };
 
-  // Handle deleting a todo
-  const handleDeleteTodo = (todoId) => {
-    const updatedTodos = todos.filter((todo) => todo.id !== todoId);
-    saveTodos(updatedTodos);
-  };
+const handleDeleteTodo = (todoId) => {
+  setTodos((prevTodos) =>
+    prevTodos.filter((prevTodo) => prevTodo.id !== todoId)
+  );
+};
+
 
   return (
     <div className="main">
       <section>
-        <h1><FaListCheck /> My Todos</h1>
+        <h1>
+          <FaListCheck /> My Todos
+        </h1>
         <AddTodo onAddTodo={handleAddTodo} />
         {todos.length > 0 ? (
           <TaskList
@@ -53,7 +48,7 @@ useEffect(() => {
             onDeleteTodo={handleDeleteTodo}
           />
         ) : (
-          <h2>NO Todos</h2>
+          <h2>No Todos</h2>
         )}
       </section>
     </div>
