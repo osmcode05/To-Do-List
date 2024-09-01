@@ -5,10 +5,13 @@ import { FaListCheck } from "react-icons/fa6";
 
 export default function App() {
 
-  const [todos, setTodos] = useState(JSON.parse(localStorage.UserToDo) || []);
-  useEffect(() => {
-    localStorage.UserToDo = JSON.stringify(todos);
-  }, [todos]);
+const [todos, setTodos] = useState(() => {
+  return localStorage.getItem("UserToDo") ? JSON.parse(localStorage.getItem("UserToDo")) : [];
+});
+  
+useEffect(() => {
+  localStorage.setItem("UserToDo", JSON.stringify(todos));
+}, [todos]);
 
   // Function to update both state and localStorage
   const saveTodos = (updatedUserToDo) => {
