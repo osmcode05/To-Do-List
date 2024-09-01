@@ -4,13 +4,10 @@ import TaskList from "./Components/TaskList.js";
 import { FaListCheck } from "react-icons/fa6";
 
 export default function App() {
-  const [todos, setTodos] = useState(() => {
-    const savedTodos = localStorage.getItem("UserToDo");
-    return savedTodos ? JSON.parse(savedTodos) : [];
-  });
+  const [todos, setTodos] = useState( localStorage.UserToDo ? JSON.parse(localStorage.UserToDo) : [] );
 
   useEffect(() => {
-    localStorage.setItem("UserToDo", JSON.stringify(todos));
+    localStorage.UserToDo =  JSON.stringify(todos);
   }, [todos]);
 
   const handleAddTodo = (todoTxt) => {
