@@ -7,7 +7,8 @@
 :root {
   --dark-color: #1f1e1e;
   --light-dark-color: #353434;
-  --green-color: #00e67a;
+  /* --green-color: #00e67a; */
+  --green-color: red;
   --white-color: #fff;
 }
 .main {
