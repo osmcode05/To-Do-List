@@ -8,29 +8,23 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+    - name: Checkout the repository
+      uses: actions/checkout@v2
 
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v2
       with:
         node-version: '20'
 
     - name: Install dependencies
       run: npm install
 
-    - name: Build
+    - name: Build the project
       run: npm run build
 
-    - name: Configure Git
-      run: |
-        git config --global user.name "osmcode05"
-        git config --global user.email "ousamatessla@gmail.com"
-
     - name: Deploy to GitHub Pages
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        npx gh-pages -d build -r https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build
