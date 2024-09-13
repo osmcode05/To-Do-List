@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { FaTrash, FaCheck, FaPen } from "react-icons/fa";
 
 export default function TaskList({ todos, onChangeTodo, onDeleteTodo }) {
+  if (todos.length <= 0) return <h2>No Todos</h2>;
+
   return (
     <ul>
       {todos.map((todo) => (

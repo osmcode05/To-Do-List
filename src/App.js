@@ -39,15 +39,12 @@ export default function App() {
           <FaListCheck /> My Todos
         </h1>
         <AddTodo onAddTodo={handleAddTodo} />
-        {todos.length > 0 ? (
-          <TaskList
-            todos={todos}
-            onChangeTodo={handleChangeTodo}
-            onDeleteTodo={handleDeleteTodo}
-          />
-        ) : (
-          <h2>No Todos</h2>
-        )}
+
+        <TaskList
+          todos={todos}
+          onChangeTodo={handleChangeTodo}
+          onDeleteTodo={handleDeleteTodo}
+        />
       </section>
     </div>
   );
