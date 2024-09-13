@@ -4,10 +4,12 @@ import TaskList from "./Components/TaskList.js";
 import { FaListCheck } from "react-icons/fa6";
 
 export default function App() {
-  const [todos, setTodos] = useState( localStorage.UserToDo ? JSON.parse(localStorage.UserToDo) : [] );
+  const [todos, setTodos] = useState(
+    localStorage.UserToDo ? JSON.parse(localStorage.UserToDo) : []
+  );
 
   useEffect(() => {
-    localStorage.UserToDo =  JSON.stringify(todos);
+    localStorage.UserToDo = JSON.stringify(todos);
   }, [todos]);
 
   const handleAddTodo = (todoTxt) => {
@@ -24,12 +26,11 @@ export default function App() {
     );
   };
 
-const handleDeleteTodo = (todoId) => {
-  setTodos((prevTodos) =>
-    prevTodos.filter((prevTodo) => prevTodo.id !== todoId)
-  );
-};
-
+  const handleDeleteTodo = (todoId) => {
+    setTodos((prevTodos) =>
+      prevTodos.filter((prevTodo) => prevTodo.id !== todoId)
+    );
+  };
 
   return (
     <div className="main">

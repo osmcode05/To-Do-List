@@ -38,12 +38,9 @@ function Task({ todo, onChange, onDelete }) {
             type="text"
             value={todo.title}
             onChange={(e) => onChange({ ...todo, title: e.target.value })}
+            onKeyDown={(e) => e.key === "Enter" && handelSaveClick(todo)}
           />
-          <FaCheck
-            role="button"
-            size={18}
-            onClick={() => handelSaveClick(todo)}
-          />
+          <FaCheck size={20} onClick={() => handelSaveClick(todo)} />
         </>
       ) : (
         <>
@@ -52,7 +49,7 @@ function Task({ todo, onChange, onDelete }) {
             checked={todo.done}
             onChange={(e) => onChange({ ...todo, done: e.target.checked })}
           />
-            <label
+          <label
             onDoubleClick={() => onChange({ ...todo, done: !todo.done })}
             style={{
               textDecoration: todo.done ? "line-through 2px red" : "",
@@ -60,8 +57,8 @@ function Task({ todo, onChange, onDelete }) {
           >
             {todo.title}
           </label>
-          <FaPen size={18} role="button" onClick={() => setIsEditing(true)} />
-          <FaTrash size={18} role="button" onClick={() => onDelete(todo.id)} />
+          <FaPen size={20} onClick={() => setIsEditing(true)} />
+          <FaTrash size={20} onClick={() => onDelete(todo.id)} />
         </>
       )}
     </>

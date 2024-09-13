@@ -22,9 +22,10 @@ export default function AddTodo({ onAddTodo }) {
         placeholder="Add Todo"
         value={todoTxt}
         onChange={(e) => setTodoTxt(e.target.value)}
+        onKeyDown={(e) => e.key === "Enter" && AddTodo()}
       />
       <button id="AddBtn" onClick={AddTodo}>
-        <FaPlus size={20} />
+        <FaPlus size={25} />
       </button>
     </div>
   );
