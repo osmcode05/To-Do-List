@@ -15,7 +15,6 @@
   display: flex;
   min-height: 100vh;
   background-color: var(--dark-color);
-  padding: 1rem .5rem;
 }
 section {
   margin: auto;
